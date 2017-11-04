@@ -1,0 +1,124 @@
+<!-- ==========================================
+		API GIFS
+========================================== -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Gif Api's</title>
+
+	<!-- Bootstrap Link -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- jQuery Link -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- My Javascript -->
+	<script type="text/javascript" src="javascript.js"></script>
+</head>
+
+<body>
+	<h1>GIF Me a Break!</h1>
+
+	<div id="buttonDisplay"></div>
+
+	<form id="searchForm">
+		<label>Search for a Gif!</label>
+		<input type="text" id="searchInput">
+		<input id="searchButton" type="submit" value="GIF me that!">
+	</form>
+
+	<div id="gifDisplay">
+		<!-- <img src='https://giphy.com/embed/3GPbOod9GkC5i'/> -->
+	</div>
+
+
+<script type="text/javascript">
+	var searchArray = ["fails", "corgis", "funny"];
+	
+
+	function displayGifs() {
+		// May need a preventDefault
+		var gifSearchQuery = $(this).attr("search-term");
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifSearchQuery + "&api_key=9LuXyX57OKgmhNUztsbNLqW5yD1hY8sz";
+
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		}).done(function(response){
+			
+
+			for(i = 0; i < response.data.length; i++){
+				var newDiv = $("<div>");
+				var newImage = $("<img>");
+				var gifURL = response.data[i].images.fixed_height_still.url;
+				newDiv.addClass("gifDiv");
+				newDiv.attr("data-animate", response.data[i].images.fixed_height.url);
+				newImage.attr("src", gifURL);
+				newDiv.html(newImage);
+				$("#gifDisplay").prepend(newDiv);
+			}
+		});
+	}
+
+	$(".gifDiv").on("click", function(){
+		$(this).attr("src", $(this).attr("data-animate"));
+	});
+
+
+	function renderButtons() {
+		$("#buttonDisplay").empty();
+
+		for(i = 0; i < searchArray.length; i++){
+			var button = $("<button>");
+			button.addClass("buttonClass");
+			button.attr("search-term", searchArray[i]);
+			button.text(searchArray[i]);
+			$("#buttonDisplay").append(button);
+		}
+
+
+	}
+
+	$("#searchButton").on("click", function(event){
+		event.preventDefault();
+		var genGifbutton = $("#searchInput").val().trim();
+		searchArray.push(genGifbutton);
+		
+		renderButtons();
+	});
+
+	$(document).on("click", ".buttonClass", displayGifs);
+
+
+	renderButtons();
+</script>
+
+
+
+</body>
+</html>
+
+
+
+<!-- Gifs start with a still image.   still need to modify the on click event to update their source to an animated gif url
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
