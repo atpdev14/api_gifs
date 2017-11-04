@@ -1,4 +1,5 @@
 .gifDiv {
 	display: inline;
-	float; left;
+	float: left;
+	margin: 3px;
 }

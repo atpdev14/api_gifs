@@ -39,6 +39,7 @@
 
 <script type="text/javascript">
 	var searchArray = ["fails", "corgis", "funny"];
+	var animateUrl;
 	
 
 	function displayGifs() {
@@ -56,18 +57,18 @@
 				var newDiv = $("<div>");
 				var newImage = $("<img>");
 				var gifURL = response.data[i].images.fixed_height_still.url;
-				newDiv.addClass("gifDiv");
-				newDiv.attr("data-animate", response.data[i].images.fixed_height.url);
+				animateUrl = response.data[i].images.fixed_height.url;
+				newImage.addClass("gifImage");
+				newImage.attr("data-animate", animateUrl);
+				newImage.attr("data-still", gifURL);
+				newImage.attr("state", "still");
+				console.log(animateUrl);
 				newImage.attr("src", gifURL);
 				newDiv.html(newImage);
 				$("#gifDisplay").prepend(newDiv);
 			}
 		});
 	}
-
-	$(".gifDiv").on("click", function(){
-		$(this).attr("src", $(this).attr("data-animate"));
-	});
 
 
 	function renderButtons() {
@@ -93,6 +94,18 @@
 	});
 
 	$(document).on("click", ".buttonClass", displayGifs);
+
+	$(document).on("click", ".gifImage", function(){
+
+		if($(this).attr("state") === "still"){
+			$(this).attr("src", $(this).attr("data-animate"));
+			$(this).attr("state", "animate");
+		} else if ($(this).attr("state") !== "still"){
+			$(this).attr("src", $(this).attr("data-still"));
+			$(this).attr("state", "still");
+		}
+		console.log($(this).attr("src"));
+	});
 
 
 	renderButtons();
