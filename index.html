@@ -45,7 +45,7 @@
 	function displayGifs() {
 		// May need a preventDefault
 		var gifSearchQuery = $(this).attr("search-term");
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifSearchQuery + "&api_key=9LuXyX57OKgmhNUztsbNLqW5yD1hY8sz";
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifSearchQuery + "&api_key=9LuXyX57OKgmhNUztsbNLqW5yD1hY8sz";
 
 		$.ajax({
 			url: queryURL,
