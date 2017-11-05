@@ -1,5 +1,27 @@
 .gifDiv {
 	display: inline;
 	float: left;
+	margin: auto;
+}
+
+#gifDisplay {
+	display: none;
+	width: 90%;
+	border-style: inset;
+	border-color: lightgrey;
+	border-width: 2px;
+	margin: auto;
+}
+
+#buttonDisplay, #searchForm {
+	text-align: center;
+	margin: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+.gifImage {
 	margin: 3px;
 }

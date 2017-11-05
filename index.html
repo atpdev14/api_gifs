@@ -22,21 +22,23 @@
 </head>
 
 <body>
-	<h1>GIF Me a Break!</h1>
+	<div class="container">
+		<h1>GIF Me a Break!</h1>
+		<hr>
 
-	<div id="buttonDisplay"></div>
+		<div id="buttonDisplay"></div>
 
-	<form id="searchForm">
-		<label>Search for a Gif!</label>
-		<input type="text" id="searchInput">
-		<input id="searchButton" type="submit" value="GIF me that!">
-	</form>
+		<form id="searchForm">
+			<label>Search for a Gif!</label>
+			<input type="text" id="searchInput">
+			<input id="searchButton" type="submit" value="GIF me that!">
+		</form>
 
-	<div id="gifDisplay">
-		<!-- <img src='https://giphy.com/embed/3GPbOod9GkC5i'/> -->
-	</div>
+		<div class="row" id="gifDisplay">
+			<!-- <img src='https://giphy.com/embed/3GPbOod9GkC5i'/> -->
+		</div>
 
-
+	</div> <!-- Container Closure -->
 <script type="text/javascript">
 	var searchArray = ["fails", "corgis", "funny"];
 	var animateUrl;
@@ -46,6 +48,7 @@
 		// May need a preventDefault
 		var gifSearchQuery = $(this).attr("search-term");
 		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifSearchQuery + "&api_key=9LuXyX57OKgmhNUztsbNLqW5yD1hY8sz";
+		$("#gifDisplay").slideDown();
 
 		$.ajax({
 			url: queryURL,
@@ -62,6 +65,7 @@
 				newImage.attr("data-animate", animateUrl);
 				newImage.attr("data-still", gifURL);
 				newImage.attr("state", "still");
+				newDiv.addClass("gifDiv");
 				console.log(animateUrl);
 				newImage.attr("src", gifURL);
 				newDiv.html(newImage);
