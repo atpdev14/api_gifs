@@ -1,3 +1,8 @@
+body {
+	background: #000000;
+}
+
+
 .gifDiv {
 	display: inline;
 	float: left;
@@ -5,6 +10,7 @@
 }
 
 #gifDisplay {
+	background: white;
 	display: none;
 	width: 90%;
 	border-style: inset;
